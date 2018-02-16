@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Tutorial: Knockout and DOJO Testing</title>
+</head>
+<body>
+        <div class="container">
+            <!-- Content here -->
+            <h3>Learning Knoclkout</h3>
+            <span class=" alert-primary"> First Name: </span> <input type="text"  data-bind='value: firstName'> </input>
+            <span class=" alert-primary"> Last Name: </span> <input type="text"  data-bind='value: lastName'> </input> <br/>
+
+            <span data-bind='text: firstName'> </span>
+            <span data-bind='text: lastName'> </span>
+
+            <h1>Widget 1 Goes here !</h1> <button type="button" class="btn btn-primary">Change Value</button>
+            <div id="widget1Container"> </div>
+            
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+<!-- configure Dojo -->
+<script>
+    // Instead of using data-dojo-config, we're creating a dojoConfig
+    // object *before* we load dojo.js; they're functionally identical,
+    // it's just easier to read this approach with a larger configuration.
+    var myBaseLoc = location.pathname.replace(/\/[^/]*$/, '') + '/MyApp';
+    var dojoConfig = {
+        async: true,
+        // This code registers the correct location of the "demo"
+        // package so we can load Dojo from the CDN whilst still
+        // being able to load local modules
+        packages: [
+            { name: "MyApp", location: myBaseLoc }
+        ] /*,
+        aliases: [  
+          // ['jquery', 'https://code.jquery.com/jquery-2.1.3.min.js '],
+          ['knockout', 'http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js ']  
+        ] */
+    };
+</script>
+<!-- load Dojo -->
+<script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>
+<!--<script type="text/javascript" src="MyApp/libs/knockout-3.4.2.js"></script> -->
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js"></script>
+
+
+<!-- Load a "demo" module -->
+<script>
+    require([
+        'MyApp/MyKOWidget/koWidget',
+        "dojo/parser",
+        'dojo/dom',
+        'knockout',
+        'dojo/domReady!'
+    ], function (koWidget, parser, dom, ko) {
+        //parser.parse(); // Parse the page
+
+        // Creating Knockout View Model foe Binding 
+        var myVM = function(){
+            var self = this;
+            self.firstName = ko.observable("Ravindra");
+            self.lastName = ko.observable("Singh");
+        }
+        ko.applyBindings(new myVM()); // Activate the Knockout JS
+            
+        });
+</script>
+
+<script>
+    
+</script>
+</html>
